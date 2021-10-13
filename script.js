@@ -3,6 +3,7 @@
 const timer = document.querySelector(".timer");
 const startBtn = document.querySelector(".start-btn");
 const gameBoard = document.querySelector(".gameboard");
+const resetBtn = document.querySelector(".reset-btn");
 
 let timeLeft = 60;
 let countdownId = 0;
@@ -89,4 +90,8 @@ gameBoard.addEventListener("click", (e) => {
   if (e.target.classList.contains("flip-card-front")) {
     e.target.parentNode.classList.add("flip");
   }
+});
+
+resetBtn.addEventListener("click", (e) => {
+  window.location.reload();
 });

@@ -1,6 +1,7 @@
 body,
 header,
-h1 {
+h1,
+main {
   margin: 0;
 }
 
@@ -9,16 +10,19 @@ header {
   padding: 0 10px 0 10px;
   font-family: "Creepster", cursive;
   color: #ff7700;
+  height: 20%;
 }
 
 body {
   background-image: url("assets/background.png");
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
 main {
-  height: 100vh;
+  height: 80%;
 }
 
 p {
@@ -64,10 +68,9 @@ p {
 .flip-card {
   background-color: transparent;
   width: 25%;
-  height: 15%;
+  height: 20%;
   border: 1px solid #f1f1f1;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
-  margin: 20px;
 }
 
 /* This container is needed to position the front and back side */

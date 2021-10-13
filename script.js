@@ -35,7 +35,28 @@ const cardArray = [
 </div> */
 }
 
+const shuffle = (array) => {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+};
+
 const createCards = (array) => {
+  shuffle(array);
   array.forEach((card) => {
     const flipCard = document.createElement("div");
     flipCard.classList.add("flip-card");
@@ -57,18 +78,6 @@ const createCards = (array) => {
 };
 
 createCards(cardArray);
-
-const shuffle = (array) => {
-  let copy = [];
-  let n = array.length;
-  let i;
-  while (n) {
-    i = Math.floor(Math.random() * n--);
-    copy.push(array.splice(i, 1)[0]);
-  }
-  return copy;
-};
-shuffle(cardArray);
 
 const countdown = () => {
   if (timeLeft > 0) {

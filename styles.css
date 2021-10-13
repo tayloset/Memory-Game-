@@ -1,7 +1,48 @@
-header {
-  background-color: #7943be;
+body,
+header,
+h1 {
+  margin: 0;
 }
 
-main {
-  background-image: url("");
+header {
+  background-color: #7943be;
+  padding: 0 10px 0 10px;
+  font-family: "Creepster", cursive;
+  color: #ff7700;
+}
+
+p {
+  font-size: 20px;
+}
+
+.title,
+.text {
+  text-align: center;
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timer {
+  background-color: black;
+  padding: 5px;
+  border: 1px solid #ff7700;
+}
+
+.start-btn,
+.reset-btn {
+  padding: 10px;
+  border-radius: 10px;
+  font-family: "Creepster", cursive;
+  color: #ff7700;
+  background-color: black;
+  border: 1px solid #ff7700;
+}
+
+.background-image {
+  width: 100vw;
+  height: 100vh;
 }

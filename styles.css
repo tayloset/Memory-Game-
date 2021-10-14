@@ -1,7 +1,6 @@
 body,
 header,
-h1,
-main {
+h1 {
   margin: 0;
 }
 
@@ -17,8 +16,8 @@ body {
   background-image: url("assets/background.png");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
   box-sizing: border-box;
+  height: 100vh;
 }
 
 main {
@@ -27,6 +26,7 @@ main {
 
 p {
   font-size: 20px;
+  margin-top: 0px;
 }
 
 .title,
@@ -44,6 +44,7 @@ p {
   background-color: black;
   padding: 5px;
   border: 1px solid #ff7700;
+  margin: 0;
 }
 
 .start-btn,
@@ -61,7 +62,7 @@ p {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-  height: 80%;
+  height: 100%;
 }
 
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
@@ -117,6 +118,29 @@ p {
 .back-image {
   width: 100%;
   height: 100%;
+}
+
+.match {
+  cursor: default;
+  background: #e5f720;
+  font-size: 33px;
+  animation-name: rubberBand;
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+  animation-duration: 0.75s;
+}
+
+.unmatched {
+  animation-name: pulse;
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+  animation-duration: 0.75s;
+  background-color: #e2043b;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.9;
 }
 
 @media only screen and (min-width: 768px) {

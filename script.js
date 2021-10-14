@@ -79,9 +79,10 @@ const createCards = (array) => {
 };
 
 createCards(cardArray);
+let matchedCard = [];
 
 const countdown = () => {
-  if (timeLeft > 0) {
+  if (timeLeft > 0 && matchedCard.length < 6) {
     timeLeft--;
     timer.textContent = `Timer: ${timeLeft}`;
   } else {
@@ -90,6 +91,7 @@ const countdown = () => {
 };
 
 let openedCards = [];
+
 console.log(openedCards);
 const cardOpen = (card) => {
   openedCards.push(card);
@@ -100,6 +102,8 @@ const cardOpen = (card) => {
     if (cardOne === cardTwo) {
       matched();
       console.log("matched");
+      matchedCard.push(card);
+      console.log(matchedCard);
     } else {
       unmatched();
       console.log("unmatched");
@@ -110,11 +114,13 @@ const cardOpen = (card) => {
 
 //for when cards match
 const matched = () => {
-  openedCards[0].parentNode.classList.add("match");
-  openedCards[1].parentNode.classList.add("match");
-  openedCards[0].parentNode.classList.remove("flip");
-  openedCards[1].parentNode.classList.remove("flip");
-  openedCards = [];
+  disable();
+  setTimeout(() => {
+    openedCards[0].parentNode.classList.add("match");
+    openedCards[1].parentNode.classList.add("match");
+    enable();
+    openedCards = [];
+  }, 1100);
 };
 
 //for when cards don't match
@@ -137,7 +143,7 @@ const disable = () => {
 };
 
 //enable cards and disable matched cards
-let matchedCard = [];
+
 const enable = () => {
   Array.prototype.filter.call(openedCards, (card) => {
     card.classList.remove("disabled");
@@ -147,20 +153,24 @@ const enable = () => {
   });
 };
 
-startBtn.addEventListener("click", (e) => {
+const playGame = (e) => {
   e.preventDefault();
   setInterval(countdown, 1000);
-
   //card function here
-});
+  gameBoard.addEventListener("click", (e) => {
+    if (
+      e.target.classList.contains("flip-card-front") &&
+      openedCards.length < 2
+    ) {
+      e.target.parentNode.classList.add("flip");
+      cardOpen(e.target);
+      console.log(e.target);
+    }
+  });
+  startBtn.removeEventListener("click", playGame);
+};
 
-gameBoard.addEventListener("click", (e) => {
-  if (e.target.classList.contains("flip-card-front")) {
-    e.target.parentNode.classList.add("flip");
-    cardOpen(e.target);
-    console.log(e.target);
-  }
-});
+startBtn.addEventListener("click", playGame);
 
 resetBtn.addEventListener("click", (e) => {
   window.location.reload();

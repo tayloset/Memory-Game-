@@ -121,21 +121,7 @@ p {
 }
 
 .match {
-  cursor: default;
-  background: #e5f720;
-  font-size: 33px;
-  animation-name: rubberBand;
-  -webkit-backface-visibility: visible !important;
-  backface-visibility: visible !important;
-  animation-duration: 0.75s;
-}
-
-.unmatched {
-  animation-name: pulse;
-  -webkit-backface-visibility: visible !important;
-  backface-visibility: visible !important;
-  animation-duration: 0.75s;
-  background-color: #e2043b;
+  display: none;
 }
 
 .disabled {

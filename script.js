@@ -23,6 +23,10 @@ const cardArray = [
   { type: "bats", img: "assets/bats.png" },
 ];
 
+const questionMark = {
+  img: "assets/question-mark.png",
+};
+
 const shuffle = (array) => {
   let currentIndex = array.length,
     randomIndex;
@@ -57,9 +61,12 @@ const createCards = (array) => {
     const backImage = document.createElement("img");
     backImage.setAttribute("src", card.img);
     backImage.classList.add("back-image");
-    // might need to attach data attribute to flipcardinner that uses type
+    const frontImage = document.createElement("img");
+    frontImage.setAttribute("src", questionMark.img);
+    frontImage.classList.add("front-image");
     flipCardFront.setAttribute("data-type", card.type);
     flipCardBack.append(backImage);
+    flipCardFront.append(frontImage);
     flipCardInner.append(flipCardFront, flipCardBack);
     flipCard.append(flipCardInner);
     gameBoard.append(flipCard);
@@ -73,9 +80,10 @@ const countdown = () => {
   if (timeLeft > 0 && matchedCard.length < 6) {
     timeLeft--;
     timer.textContent = `Timer: ${timeLeft}`;
+  } else if (timeLeft === 0 && matchedCard.length < 6) {
+    alert("Time's up! Muahahaha!");
   } else {
     clearInterval(countdownId);
-    alert("Time's up! Muahahaha!");
   }
 };
 
@@ -101,16 +109,14 @@ const cardOpen = (card) => {
       unmatched();
     }
   }
-  console.log(openedCards);
 };
 
 //for when cards match
 const matched = () => {
-  disable();
   setTimeout(() => {
     openedCards[0].parentNode.classList.add("match");
     openedCards[1].parentNode.classList.add("match");
-    enable();
+    // enable();
     openedCards = [];
   }, 1100);
 };
@@ -119,42 +125,20 @@ const matched = () => {
 const unmatched = () => {
   openedCards[0].parentNode.classList.add("unmatched");
   openedCards[1].parentNode.classList.add("unmatched");
-  disable();
   setTimeout(() => {
     openedCards[0].parentNode.classList.remove("flip", "unmatched");
     openedCards[1].parentNode.classList.remove("flip", "unmatched");
-    enable();
     openedCards = [];
   }, 1100);
-};
-
-const disable = () => {
-  Array.prototype.filter.call(openedCards, (card) => {
-    card.classList.add("disabled");
-  });
-};
-
-//enable cards and disable matched cards
-
-const enable = () => {
-  Array.prototype.filter.call(openedCards, (card) => {
-    card.classList.remove("disabled");
-    for (let i = 0; i < matchedCard.length; i++) {
-      matchedCard[i].classList.add("disabled");
-    }
-  });
 };
 
 const playGame = (e) => {
   e.preventDefault();
   setInterval(countdown, 1000);
   gameBoard.addEventListener("click", (e) => {
-    if (
-      e.target.classList.contains("flip-card-front") &&
-      openedCards.length < 2
-    ) {
-      e.target.parentNode.classList.add("flip");
-      cardOpen(e.target);
+    if (e.target.classList.contains("front-image") && openedCards.length < 2) {
+      e.target.parentNode.parentNode.classList.add("flip");
+      cardOpen(e.target.parentNode);
     }
     alertWin();
   });

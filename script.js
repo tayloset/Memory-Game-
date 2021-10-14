@@ -70,6 +70,7 @@ const createCards = (array) => {
     backImage.setAttribute("src", card.img);
     backImage.classList.add("back-image");
     // might need to attach data attribute to flipcardinner that uses type
+    flipCardFront.setAttribute("data-type", card.type);
     flipCardBack.append(backImage);
     flipCardInner.append(flipCardFront, flipCardBack);
     flipCard.append(flipCardInner);
@@ -88,6 +89,64 @@ const countdown = () => {
   }
 };
 
+let openedCards = [];
+console.log(openedCards);
+const cardOpen = (card) => {
+  openedCards.push(card);
+
+  if (openedCards.length === 2) {
+    let cardOne = openedCards[0].getAttribute("data-type");
+    let cardTwo = openedCards[1].getAttribute("data-type");
+    if (cardOne === cardTwo) {
+      matched();
+      console.log("matched");
+    } else {
+      unmatched();
+      console.log("unmatched");
+    }
+  }
+  console.log(openedCards);
+};
+
+//for when cards match
+const matched = () => {
+  openedCards[0].parentNode.classList.add("match");
+  openedCards[1].parentNode.classList.add("match");
+  openedCards[0].parentNode.classList.remove("flip");
+  openedCards[1].parentNode.classList.remove("flip");
+  openedCards = [];
+};
+
+//for when cards don't match
+const unmatched = () => {
+  openedCards[0].parentNode.classList.add("unmatched");
+  openedCards[1].parentNode.classList.add("unmatched");
+  disable();
+  setTimeout(() => {
+    openedCards[0].parentNode.classList.remove("flip", "unmatched");
+    openedCards[1].parentNode.classList.remove("flip", "unmatched");
+    enable();
+    openedCards = [];
+  }, 1100);
+};
+
+const disable = () => {
+  Array.prototype.filter.call(openedCards, (card) => {
+    card.classList.add("disabled");
+  });
+};
+
+//enable cards and disable matched cards
+let matchedCard = [];
+const enable = () => {
+  Array.prototype.filter.call(openedCards, (card) => {
+    card.classList.remove("disabled");
+    for (let i = 0; i < matchedCard.length; i++) {
+      matchedCard[i].classList.add("disabled");
+    }
+  });
+};
+
 startBtn.addEventListener("click", (e) => {
   e.preventDefault();
   setInterval(countdown, 1000);
@@ -98,6 +157,8 @@ startBtn.addEventListener("click", (e) => {
 gameBoard.addEventListener("click", (e) => {
   if (e.target.classList.contains("flip-card-front")) {
     e.target.parentNode.classList.add("flip");
+    cardOpen(e.target);
+    console.log(e.target);
   }
 });
 

@@ -23,18 +23,6 @@ const cardArray = [
   { type: "bats", img: "assets/bats.png" },
 ];
 
-{
-  /* <div class="flip-card">
-  <div class="flip-card-inner">
-    <div class="flip-card-front">
-    </div>
-    <div class="flip-card-back">
-          <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
-    </div>
-  </div>
-</div> */
-}
-
 const shuffle = (array) => {
   let currentIndex = array.length,
     randomIndex;
@@ -87,6 +75,13 @@ const countdown = () => {
     timer.textContent = `Timer: ${timeLeft}`;
   } else {
     clearInterval(countdownId);
+    alert("Time's up! Muahahaha!");
+  }
+};
+
+const alertWin = () => {
+  if (matchedCard.length === 6 && timeLeft > 0) {
+    alert("You won!!");
   }
 };
 
@@ -101,12 +96,9 @@ const cardOpen = (card) => {
     let cardTwo = openedCards[1].getAttribute("data-type");
     if (cardOne === cardTwo) {
       matched();
-      console.log("matched");
       matchedCard.push(card);
-      console.log(matchedCard);
     } else {
       unmatched();
-      console.log("unmatched");
     }
   }
   console.log(openedCards);
@@ -156,7 +148,6 @@ const enable = () => {
 const playGame = (e) => {
   e.preventDefault();
   setInterval(countdown, 1000);
-  //card function here
   gameBoard.addEventListener("click", (e) => {
     if (
       e.target.classList.contains("flip-card-front") &&
@@ -164,8 +155,8 @@ const playGame = (e) => {
     ) {
       e.target.parentNode.classList.add("flip");
       cardOpen(e.target);
-      console.log(e.target);
     }
+    alertWin();
   });
   startBtn.removeEventListener("click", playGame);
 };

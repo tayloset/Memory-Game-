@@ -6,17 +6,18 @@ h1 {
 
 header {
   background-color: #7943be;
-  padding: 0 10px 0 10px;
+  padding: 10px;
   font-family: "Creepster", cursive;
   color: #ff7700;
   height: 20%;
+  border: 2px solid black;
+  box-sizing: border-box;
 }
 
 body {
   background-image: url("assets/background.png");
   background-repeat: no-repeat;
   background-size: cover;
-  box-sizing: border-box;
   height: 100vh;
 }
 
@@ -99,10 +100,12 @@ p {
   backface-visibility: hidden;
 }
 
-/* Style the front side (fallback if image is missing) */
+/* Style the front side */
 .flip-card-front {
   background-color: #7943be;
-  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Style the back side */
@@ -120,13 +123,15 @@ p {
   height: 100%;
 }
 
-.match {
-  display: none;
+.front-image {
+  width: 100%;
+  height: 100%;
+  padding: 5% 25%;
+  box-sizing: border-box;
 }
 
-.disabled {
-  pointer-events: none;
-  opacity: 0.9;
+.match {
+  display: none;
 }
 
 @media only screen and (min-width: 768px) {

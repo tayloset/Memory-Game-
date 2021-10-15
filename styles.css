@@ -7,8 +7,6 @@ h1 {
 header {
   background-color: #7943be;
   padding: 10px;
-  font-family: "Creepster", cursive;
-  color: #ff7700;
   height: 20%;
   border: 2px solid black;
   box-sizing: border-box;
@@ -19,6 +17,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+  font-family: "Creepster", cursive;
+  color: #ff7700;
 }
 
 main {
@@ -131,6 +131,51 @@ p {
 }
 
 .match {
+  display: none;
+}
+
+.container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+}
+
+.end-message {
+  position: relative;
+  width: 50%;
+  height: 50%;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background-color: black;
+  color: #ff7700;
+  padding: 5px;
+  margin-top: 4px;
+}
+
+.win,
+.lose {
+  background-color: #7943be;
+  border: 3px solid orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.hide {
   display: none;
 }
 

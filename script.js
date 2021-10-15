@@ -4,9 +4,13 @@ const timer = document.querySelector(".timer");
 const startBtn = document.querySelector(".start-btn");
 const gameBoard = document.querySelector(".gameboard");
 const resetBtn = document.querySelector(".reset-btn");
+const win = document.querySelector(".win");
+const lose = document.querySelector(".lose");
+const container = document.querySelector(".container");
+const close = document.querySelector(".close");
 
 let timeLeft = 60;
-let countdownId = 0;
+let countdownId;
 
 const cardArray = [
   { type: "pumpkin", img: "assets/pumpkin.png" },
@@ -81,7 +85,10 @@ const countdown = () => {
     timeLeft--;
     timer.textContent = `Timer: ${timeLeft}`;
   } else if (timeLeft === 0 && matchedCard.length < 6) {
-    alert("Time's up! Muahahaha!");
+    clearInterval(countdownId);
+    // alert("Time's up! Muahahaha!");
+    lose.classList.remove("hide");
+    container.classList.remove("hide");
   } else {
     clearInterval(countdownId);
   }
@@ -89,7 +96,9 @@ const countdown = () => {
 
 const alertWin = () => {
   if (matchedCard.length === 6 && timeLeft > 0) {
-    alert("You won!!");
+    // alert("You won!!");
+    win.classList.remove("hide");
+    container.classList.remove("hide");
   }
 };
 
@@ -135,7 +144,7 @@ const unmatched = () => {
 const playGame = (e) => {
   e.preventDefault();
   startBtn.textContent = "Go!";
-  setInterval(countdown, 1000);
+  countdownId = setInterval(countdown, 1000);
   gameBoard.addEventListener("click", (e) => {
     if (e.target.classList.contains("front-image") && openedCards.length < 2) {
       e.target.parentNode.parentNode.classList.add("flip");
@@ -149,5 +158,12 @@ const playGame = (e) => {
 startBtn.addEventListener("click", playGame);
 
 resetBtn.addEventListener("click", (e) => {
+  window.location.reload();
+});
+
+close.addEventListener("click", (e) => {
+  win.classList.add("hide");
+  lose.classList.add("hide");
+  container.classList.add("hide");
   window.location.reload();
 });

@@ -134,6 +134,7 @@ const unmatched = () => {
 
 const playGame = (e) => {
   e.preventDefault();
+  startBtn.textContent = "Go!";
   setInterval(countdown, 1000);
   gameBoard.addEventListener("click", (e) => {
     if (e.target.classList.contains("front-image") && openedCards.length < 2) {

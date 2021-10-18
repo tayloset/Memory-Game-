@@ -11,6 +11,7 @@ const close = document.querySelector(".close");
 
 let timeLeft = 60;
 let countdownId;
+let audio = new Audio("assets/win-audio.mp3");
 
 const cardArray = [
   { type: "pumpkin", img: "assets/pumpkin.png" },
@@ -99,6 +100,7 @@ const alertWin = () => {
     // alert("You won!!");
     win.classList.remove("hide");
     container.classList.remove("hide");
+    audio.play();
   }
 };
 

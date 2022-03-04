@@ -14,8 +14,8 @@ let countdownId;
 let audio = new Audio("assets/win-audio.mp3");
 
 const cardArray = [
-  { type: "pumpkin", img: "assets/pumpkin.png" },
-  { type: "pumpkin", img: "assets/pumpkin.png" },
+  { type: "pumpkin", img: "assets/Pumpkin.png" },
+  { type: "pumpkin", img: "assets/Pumpkin.png" },
   { type: "witch", img: "assets/witch.png" },
   { type: "witch", img: "assets/witch.png" },
   { type: "cobweb", img: "assets/spider-web.png" },
